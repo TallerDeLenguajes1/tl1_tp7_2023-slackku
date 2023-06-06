@@ -9,7 +9,7 @@ class Empleado
     private char Genero;
     private DateTime FechaJoinOrg;
     private double SueldoBasico;
-    private Cargo CargoEmpleado;
+    private Cargo? CargoEmpleado;
 
     public Empleado()
     {
@@ -47,15 +47,29 @@ class Empleado
         return tiempo;
     }
 
-    // public double salario()
-    // {
-    //     int antiq = antiguedad();
-    //     int adicional;
-    //     if (antiq < 20)
-    //     {
-    //         // SOME
-    //     }
-    // }
+    public double salario()
+    {
+        int antiq = antiguedad();
+        double adicional;
+        if (antiq < 20)
+        {
+            adicional = SueldoBasico * (0.01 * antiq);
+        }
+        else
+        {
+            adicional = SueldoBasico * 0.25;
+        }
+        if (CargoEmpleado == Cargo.Especialista || CargoEmpleado == Cargo.Ingeniero)
+        {
+            adicional += adicional * 0.5;
+        }
+        if (EstadoCivil == 'C')
+        {
+            adicional += 15000;
+        }
+
+        return SueldoBasico + adicional;
+    }
 
 }
 
